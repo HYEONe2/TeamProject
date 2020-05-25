@@ -13,11 +13,17 @@ public class GameManager_Script : MonoBehaviour
 
     public int[,] array = new int[3, 3];
 
-    private int score = 0;
-    public Text scoreText;
+    public static int score = 0;
+    //public Text scoreText;
 
-    private int time = 600;
-    public Text TimeText;
+    public static int time = 600;
+    //public Text TimeText;
+
+    public List<int> player_select = new List<int>();
+    private int previouse_value=  0;
+    private int combo_counter = 0;
+
+    public static bool CameraShaking_On = false;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +73,7 @@ public class GameManager_Script : MonoBehaviour
         if (time >= 1)
         {
             time -= 1;
-            TimeText.text = "Time: " + time.ToString();
+            //TimeText.text = "Time: " + time.ToString();
         }
         else
         {
@@ -95,18 +101,48 @@ public class GameManager_Script : MonoBehaviour
             if (clickColl.gameObject.tag == "Block1")
             {
                 score += 1;
-                scoreText.text = "Score: " + score.ToString();
+                //scoreText.text = "Score: " + score.ToString();
+                player_select.Add(1);
+                Destroy(clickColl.gameObject);
+                CameraShaking_On = true;
+
+
             }
             if (clickColl.gameObject.tag == "Block2")
             {
                 score += 2;
-                scoreText.text = "Score: " + score.ToString();
+                //scoreText.text = "Score: " + score.ToString();
+                player_select.Add(2);
+                Destroy(clickColl.gameObject);
+                CameraShaking_On = true;
             }
             if (clickColl.gameObject.tag == "Block3")
             {
                 score += 3;
-                scoreText.text = "Score: " + score.ToString();
+                //scoreText.text = "Score: " + score.ToString();
+                player_select.Add(3);
+                Destroy(clickColl.gameObject);
+                CameraShaking_On = true;
             }
         }
+
+        combo_counter = 0;
+        for (int i=0;i<player_select.Count; ++i)
+        {
+            Debug.Log("player_select: " + i +" " + player_select[i]);
+
+            if(previouse_value== player_select[i])
+            {
+                combo_counter += 1;
+            }
+
+            previouse_value = player_select[i];
+            Debug.Log("combo_counter: " + combo_counter);
+        }
+
+        //foreach(int value in player_select)
+        //{
+        //    Debug.Log(value);
+        //}
     }
 }
