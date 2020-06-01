@@ -17,7 +17,7 @@ public class TextMeshScore_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        resource = GameManager_Script.score;
+        resource = Puzzle_Parameters.score;
         resourceText.text = "Score: " + resource.ToString();
     }
 }

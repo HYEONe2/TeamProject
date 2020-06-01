@@ -17,7 +17,7 @@ public class TextMesh_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        resource = GameManager_Script.time;
+        resource = Puzzle_Parameters.time;
         resourceText.text = "Time: " + resource.ToString();
     }
 }
