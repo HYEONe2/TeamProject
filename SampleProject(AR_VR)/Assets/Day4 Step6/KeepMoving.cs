@@ -15,6 +15,13 @@ public class KeepMoving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.forward = Camera.main.transform.forward;
         transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter(UnityEngine.Collision collision)
+    {
+        if (collision.gameObject.name == "Wall")
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }
